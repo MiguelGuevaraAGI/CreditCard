@@ -1,10 +1,14 @@
 import { DialogPanel } from "@headlessui/react";
-import { ModalProps } from "../interfaces";
+import { CreditCardForm, ModalProps } from "../interfaces";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CreditCardModal({ setIsOpen }: ModalProps) {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreditCardForm>();
 
   const onSubmit = handleSubmit((data) => {
     const dataCreditCard = {
@@ -28,9 +32,20 @@ export default function CreditCardModal({ setIsOpen }: ModalProps) {
             <input
               type="text"
               id="cardNumber"
-              {...register("cardNumber")}
+              {...register("cardNumber", {
+                required: "Card number is required",
+                pattern: {
+                  value: /^[0-9]{16}$/i,
+                  message: "Card number invalidate",
+                },
+              })}
               className="focus:outline-none"
             />
+            {errors.cardNumber && (
+              <span className="text-sm text-red-500">
+                {errors.cardNumber.message}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col">

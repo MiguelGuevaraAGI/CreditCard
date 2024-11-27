@@ -1,11 +1,15 @@
 "use client";
 import { DialogPanel } from "@headlessui/react";
-import { ModalProps } from "../interfaces";
+import { ModalProps, UserForm } from "../interfaces";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
 export default function UserModal({ setIsOpen }: ModalProps) {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserForm>();
 
   const onSubmit = handleSubmit((data) => {
     const dataUser = {
@@ -30,9 +34,22 @@ export default function UserModal({ setIsOpen }: ModalProps) {
               <input
                 type="email"
                 id="email"
-                {...register("email")}
+                {...register("email", {
+                  required: "Email is required",
+
+                  pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i,
+                    message: "Email invalidate",
+                  },
+                })}
                 className="focus:outline-none"
               />
+
+              {errors.email && (
+                <span className="text-sm text-red-500">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col">
@@ -40,9 +57,21 @@ export default function UserModal({ setIsOpen }: ModalProps) {
               <input
                 type="password"
                 id="password"
-                {...register("password")}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
                 className="focus:outline-none"
               />
+
+              {errors.password && (
+                <span className="text-sm text-red-500">
+                  {errors.password.message}
+                </span>
+              )}
             </div>
           </div>
 
@@ -52,9 +81,17 @@ export default function UserModal({ setIsOpen }: ModalProps) {
               <input
                 type="text"
                 id="firstName"
-                {...register("firstName")}
+                {...register("firstName", {
+                  required: "Firtsname is required",
+                })}
                 className="focus:outline-none"
               />
+
+              {errors.firstName && (
+                <span className="text-sm text-red-500">
+                  {errors.firstName.message}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-col">
@@ -62,9 +99,17 @@ export default function UserModal({ setIsOpen }: ModalProps) {
               <input
                 type="text"
                 id="lastName"
-                {...register("lastName")}
+                {...register("lastName", {
+                  required: "Lastname is required",
+                })}
                 className="focus:outline-none"
               />
+
+              {errors.lastName && (
+                <span className="text-sm text-red-500">
+                  {errors?.lastName?.message}
+                </span>
+              )}
             </div>
           </div>
 
