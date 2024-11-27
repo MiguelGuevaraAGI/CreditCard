@@ -11,6 +11,7 @@ export default function AttachmentModal({ setIsOpen }: ModalProps) {
       ...data,
       id: uuidv4(),
       createdAt: new Date().toISOString(),
+      transactionId: uuidv4(),
     };
 
     console.log(dataAttachment);
