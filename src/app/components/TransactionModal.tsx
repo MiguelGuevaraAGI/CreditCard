@@ -1,30 +1,105 @@
 import { DialogPanel } from "@headlessui/react";
 import { ModalProps } from "../interfaces";
+import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TransactionModal({ setIsOpen }: ModalProps) {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit((data) => {
+    const dataTransaction = {
+      ...data,
+      id: uuidv4(),
+      createdAt: new Date().toISOString(),
+      cardHolderId: uuidv4(),
+      creditCardId: uuidv4(),
+      companyId: uuidv4(),
+      statusId: uuidv4(),
+      expenseId: uuidv4(),
+    };
+
+    console.log(dataTransaction);
+  });
+
   return (
-    <DialogPanel className="w-4/5 space-y-4 rounded-lg bg-white px-8 py-5 md:w-2/5">
+    <DialogPanel className="w-4/5 space-y-4 rounded-lg bg-white p-6 md:w-2/5">
       <h3 className="text-center text-xl font-bold">Register Transaction</h3>
 
-      <form className="space-y-4">
+      <form onSubmit={onSubmit} className="space-y-4">
         <div className="space-y-3 [&>div>div>input]:rounded-md [&>div>div>input]:border [&>div>div>input]:border-gray-300 [&>div>div>input]:px-3 [&>div>div>input]:py-1.5">
           <div className="flex gap-10 [&>div]:flex-1">
             <div className="flex flex-col">
-              <label htmlFor="UserStatus">User Status:</label>
+              <label htmlFor="userStatus">User Status:</label>
               <input
                 type="text"
-                name="UserStatus"
-                id="UserStatus"
+                id="userStatus"
+                {...register("userStatus")}
+                className="focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-10 [&>div]:flex-1">
+            <div className="flex flex-col">
+              <label htmlFor="cardHolder">Card Holder:</label>
+              <input
+                type="text"
+                id="cardHolder"
+                {...register("cardHolder")}
                 className="focus:outline-none"
               />
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="CardHolderID">Card Holder ID:</label>
+              <label htmlFor="creditCard">Credit Card:</label>
+              <input
+                type="text"
+                id="creditCard"
+                {...register("creditCard")}
+                className="focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-10 [&>div]:flex-1">
+            <div className="flex flex-col">
+              <label htmlFor="company">Company:</label>
+              <input
+                type="text"
+                id="company"
+                {...register("company")}
+                className="focus:outline-none"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="status">Status:</label>
+              <input
+                type="text"
+                id="status"
+                {...register("status")}
+                className="focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-10 [&>div]:flex-1">
+            <div className="flex flex-col">
+              <label htmlFor="amount">Amount:</label>
               <input
                 type="number"
-                name="CardHolderID"
-                id="CardHolderID"
+                id="amount"
+                {...register("amount")}
+                className="focus:outline-none"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="event">Event:</label>
+              <input
+                type="text"
+                id="event"
+                {...register("event")}
                 className="focus:outline-none"
               />
             </div>
@@ -32,21 +107,21 @@ export default function TransactionModal({ setIsOpen }: ModalProps) {
 
           <div className="flex gap-10 [&>div]:flex-1">
             <div className="flex flex-col">
-              <label htmlFor="CardHolder">Card Holder:</label>
+              <label htmlFor="memo">Memo:</label>
               <input
                 type="text"
-                name="CardHolder"
-                id="CardHolder"
+                id="memo"
+                {...register("memo")}
                 className="focus:outline-none"
               />
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="CreditcardID">Credit Card ID:</label>
+              <label htmlFor="expense">Expense:</label>
               <input
-                type="number"
-                name="CreditcardID"
-                id="CreditcardID"
+                type="text"
+                id="expense"
+                {...register("expense")}
                 className="focus:outline-none"
               />
             </div>
@@ -54,123 +129,12 @@ export default function TransactionModal({ setIsOpen }: ModalProps) {
 
           <div className="flex gap-10 [&>div]:flex-1">
             <div className="flex flex-col">
-              <label htmlFor="Creditcard">Credit Card:</label>
-              <input
-                type="text"
-                name="Creditcard"
-                id="Creditcard"
-                className="focus:outline-none"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="CompanyID">Company ID:</label>
-              <input
-                type="number"
-                name="CompanyID"
-                id="CompanyID"
-                className="focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-10 [&>div]:flex-1">
-            <div className="flex flex-col">
-              <label htmlFor="Company">Company:</label>
-              <input
-                type="text"
-                name="Company"
-                id="Company"
-                className="focus:outline-none"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="Description">Description:</label>
-              <input
-                type="text"
-                name="Description"
-                id="Description"
-                className="focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-10 [&>div]:flex-1">
-            <div className="flex flex-col">
-              <label htmlFor="Amount">Amount:</label>
-              <input
-                type="number"
-                name="Amount"
-                id="Amount"
-                className="focus:outline-none"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="Event">Event:</label>
-              <input
-                type="text"
-                name="Event"
-                id="Event"
-                className="focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-10 [&>div]:flex-1">
-            <div className="flex flex-col">
-              <label htmlFor="Memo">Memo:</label>
-              <input
-                type="text"
-                name="Memo"
-                id="Memo"
-                className="focus:outline-none"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="ExpenseID">Expense ID:</label>
-              <input
-                type="number"
-                name="ExpenseID"
-                id="ExpenseID"
-                className="focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-10 [&>div]:flex-1">
-            <div className="flex flex-col">
-              <label htmlFor="Expense">Expense:</label>
-              <input
-                type="text"
-                name="Expense"
-                id="Expense"
-                className="focus:outline-none"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="StatusID">Status ID:</label>
-              <input
-                type="number"
-                name="StatusID"
-                id="StatusID"
-                className="focus:outline-none"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-10 [&>div]:flex-1">
-            <div className="flex flex-col">
-              <label htmlFor="Status">Status:</label>
-              <input
-                type="text"
-                name="Status"
-                id="Status"
-                className="focus:outline-none"
-              />
+              <label htmlFor="description">Description:</label>
+              <textarea
+                id="description"
+                {...register("description")}
+                className="h-24 rounded-md border border-gray-300 px-3 py-1.5 focus:outline-none"
+              ></textarea>
             </div>
           </div>
         </div>
@@ -184,11 +148,7 @@ export default function TransactionModal({ setIsOpen }: ModalProps) {
             Cancel
           </button>
 
-          <button
-            className="rounded bg-blue-500 text-white"
-            type="button"
-            onClick={() => setIsOpen(false)}
-          >
+          <button className="rounded bg-blue-500 text-white" type="submit">
             Submit
           </button>
         </div>
