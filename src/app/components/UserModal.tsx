@@ -3,6 +3,7 @@ import { DialogPanel } from "@headlessui/react";
 import { ModalProps, UserForm } from "../interfaces";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
+import CustomInput from "./inputs/CustomInput";
 
 export default function UserModal({ setIsOpen }: ModalProps) {
   const {
@@ -20,6 +21,7 @@ export default function UserModal({ setIsOpen }: ModalProps) {
     };
 
     console.log(dataUser);
+    setIsOpen(false);
   });
 
   return (
@@ -30,86 +32,43 @@ export default function UserModal({ setIsOpen }: ModalProps) {
         <div className="space-y-3 [&>div>div>input]:rounded-md [&>div>div>input]:border [&>div>div>input]:border-gray-300 [&>div>div>input]:px-3 [&>div>div>input]:py-1.5">
           <div className="flex gap-10 [&>div]:flex-1">
             <div className="flex flex-col">
-              <label htmlFor="email">Email:</label>
-              <input
+              <CustomInput
+                errors={errors}
+                register={register}
+                label="Email"
+                name="email"
                 type="email"
-                id="email"
-                {...register("email", {
-                  required: "Email is required",
-
-                  pattern: {
-                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i,
-                    message: "Email invalidate",
-                  },
-                })}
-                className="focus:outline-none"
               />
-
-              {errors.email && (
-                <span className="text-sm text-red-500">
-                  {errors.email.message}
-                </span>
-              )}
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="password">Password:</label>
-              <input
+              <CustomInput
+                errors={errors}
+                register={register}
+                label="Password"
+                name="password"
                 type="password"
-                id="password"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-                className="focus:outline-none"
               />
-
-              {errors.password && (
-                <span className="text-sm text-red-500">
-                  {errors.password.message}
-                </span>
-              )}
             </div>
           </div>
 
           <div className="flex gap-10 [&>div]:flex-1">
             <div className="flex flex-col">
-              <label htmlFor="firstName">First Name:</label>
-              <input
-                type="text"
-                id="firstName"
-                {...register("firstName", {
-                  required: "Firtsname is required",
-                })}
-                className="focus:outline-none"
+              <CustomInput
+                errors={errors}
+                register={register}
+                label="First Name"
+                name="firstName"
               />
-
-              {errors.firstName && (
-                <span className="text-sm text-red-500">
-                  {errors.firstName.message}
-                </span>
-              )}
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="lastName">Last Name:</label>
-              <input
-                type="text"
-                id="lastName"
-                {...register("lastName", {
-                  required: "Lastname is required",
-                })}
-                className="focus:outline-none"
+              <CustomInput
+                errors={errors}
+                register={register}
+                label="Last Name"
+                name="lastName"
               />
-
-              {errors.lastName && (
-                <span className="text-sm text-red-500">
-                  {errors?.lastName?.message}
-                </span>
-              )}
             </div>
           </div>
 
