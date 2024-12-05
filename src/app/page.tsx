@@ -6,6 +6,7 @@ import ExpenseModal from "./components/ExpenseModal";
 import CreditCardModal from "./components/CreditCardModal";
 import AttachmentModal from "./components/AttachmentModal";
 import TransactionModal from "./components/TransactionModal";
+import { IoDocumentAttach } from "react-icons/io5";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,13 +42,6 @@ export default function Home() {
             Register CreditCard
           </button>
 
-          {/* <button
-            className="transition-all hover:rounded-md hover:bg-slate-800 hover:px-5 hover:py-2"
-            onClick={() => handleOpenModal("attachment")}
-          >
-            Register Attachment
-          </button> */}
-
           <button
             className="transition-all hover:rounded-md hover:bg-slate-800 hover:px-5 hover:py-2"
             onClick={() => handleOpenModal("transaction")}
@@ -68,9 +62,7 @@ export default function Home() {
         {modalType === "creditCard" && (
           <CreditCardModal setIsOpen={setIsOpen} />
         )}
-        {modalType === "attachment" && (
-          <AttachmentModal setIsOpen={setIsOpen} />
-        )}
+        {modalType === "attachment" && <AttachmentModal />}
 
         {modalType === "transaction" && (
           <TransactionModal setIsOpen={setIsOpen} />
@@ -108,7 +100,12 @@ export default function Home() {
               <td>$100</td>
               <td>$100</td>
               <td>$100</td>
-              <td>icon</td>
+              <td>
+                <IoDocumentAttach
+                  className="cursor-pointer text-center text-3xl"
+                  onClick={() => handleOpenModal("attachment")}
+                />
+              </td>
               <td>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the standard dummy text ever

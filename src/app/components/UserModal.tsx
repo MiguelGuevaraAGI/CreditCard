@@ -29,7 +29,7 @@ export default function UserModal({ setIsOpen }: ModalProps) {
       <h3 className="text-center text-xl font-bold">Register User</h3>
 
       <form onSubmit={onSubmit} className="space-y-4">
-        <div className="space-y-3 [&>div>div>input]:rounded-md [&>div>div>input]:border [&>div>div>input]:border-gray-300 [&>div>div>input]:px-3 [&>div>div>input]:py-1.5">
+        <div className="space-y-3">
           <div className="flex gap-10 [&>div]:flex-1">
             <div className="flex flex-col">
               <CustomInput
@@ -79,7 +79,7 @@ export default function UserModal({ setIsOpen }: ModalProps) {
                 type="text"
                 id="role"
                 {...register("role")}
-                className="focus:outline-none"
+                className="rounded-md border border-gray-300 px-3 py-1.5 focus:outline-none"
               />
             </div>
           </div>

@@ -25,7 +25,7 @@ export default function CustomInput({
         {...register(name, {
           required: `${label} is required`,
         })}
-        className="focus:outline-none"
+        className="rounded-md border border-gray-300 px-3 py-1.5 focus:outline-none"
       />
 
       {errors[name] && (

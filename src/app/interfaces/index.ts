@@ -21,3 +21,8 @@ export interface CreditCardForm {
   expiration: string;
   id: string;
 }
+
+export interface LoginForm {
+  email: string;
+  password: string;
+}

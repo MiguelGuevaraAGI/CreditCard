@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "animate.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="bg-slate-300" cz-shortcut-listen="true">{children}</body>
+      <body className="bg-slate-300" cz-shortcut-listen="true">
+        {children}
+      </body>
     </html>
   );
 }
