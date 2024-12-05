@@ -1,8 +1,8 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import { UserForm } from "../interfaces";
-import LoginComponent from "../components/LoginComponent";
+import { UserForm } from "../../interfaces";
+import LoginComponent from "../../components/LoginComponent";
 
 
 export default function Login() {
